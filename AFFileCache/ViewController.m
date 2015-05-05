@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "AFAppDotNetAPIClient.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    
+    NSString *url = [[NSString stringWithFormat:@"%@", @"http://api.map.baidu.com/telematics/v3/weather?location=北京&output=json&ak=W69oaDTCfuGwzNwmtVvgWfGH"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    [[AFAppCacheAPIClient sharedClient] downloadWithMethod:kAFNetworkingMethodGET URLString:url parameters:nil mustExpireInSeconds:120 updateCache:NO forceRequest:NO completion:^(id responseObject, BOOL isCached, NSError *error) {
+        NSLog(@"response object %@", responseObject);
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {
